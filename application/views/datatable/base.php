@@ -19,8 +19,8 @@
  */
 
 $sql_details = array(
-    'user' => 'root',
-    'pass' => 'Singosari123',
+    'user' => DB_USERNAME,
+    'pass' => DB_PASS,
     'db'   => 'emif_framework',
     'host' => 'localhost'
 );
