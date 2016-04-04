@@ -68,25 +68,25 @@ CREATE TABLE IF NOT EXISTS `comments` (
 --
 
 INSERT INTO `comments` (`comment_id`, `parent_id`, `name`, `email`, `no_telp`, `website`, `comment_count`, `rateable`, `rateup`, `public`) VALUES
-(62, 34, 'Maulana', 'maulcux@gmail.com', NULL, 'http://codemastery.net', 1, 1, 0, 1),
-(63, 62, 'Maulana', 'maulcux@gmail.com', NULL, 'http://codemastery.net', 1, 1, 0, 1),
-(65, 63, 'Maulana', 'maulcux@gmail.com', NULL, '', 0, 1, 0, 1),
-(88, 34, 'Maulana', 'maulcux@gmail.com', NULL, '', 0, 1, 0, 1),
-(113, 38, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 0, 1, 0, 1),
-(114, 108, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 1, 1, 0, 1),
-(115, 108, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 0, 1, 0, 1),
-(116, 114, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 2, 1, 0, 1),
-(117, 116, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 0, 1, 0, 1),
-(118, 116, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 0, 1, 0, 1),
-(119, 107, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 0, 1, 0, 1),
-(124, 45, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 0, 1, 0, 1),
-(125, 45, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 0, 1, 0, 1),
-(127, 45, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 0, 1, 0, NULL),
+(62, 34, 'Maulana', 'maulshh@gmail.com', NULL, 'http://codemastery.net', 1, 1, 0, 1),
+(63, 62, 'Maulana', 'maulshh@gmail.com', NULL, 'http://codemastery.net', 1, 1, 0, 1),
+(65, 63, 'Maulana', 'maulshh@gmail.com', NULL, '', 0, 1, 0, 1),
+(88, 34, 'Maulana', 'maulshh@gmail.com', NULL, '', 0, 1, 0, 1),
+(113, 38, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 0, 1, 0, 1),
+(114, 108, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 1, 1, 0, 1),
+(115, 108, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 0, 1, 0, 1),
+(116, 114, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 2, 1, 0, 1),
+(117, 116, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 0, 1, 0, 1),
+(118, 116, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 0, 1, 0, 1),
+(119, 107, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 0, 1, 0, 1),
+(124, 45, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 0, 1, 0, 1),
+(125, 45, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 0, 1, 0, 1),
+(127, 45, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 0, 1, 0, NULL),
 (129, 109, 'Pengkom Ceria', 'pengkom@codemastery.net', NULL, NULL, 1, 1, 0, 1),
 (130, 129, 'Pengkom Ceria', 'pengkom@codemastery.net', NULL, NULL, 1, 1, 0, 1),
 (131, 130, 'Pengkom Ceria', 'pengkom@codemastery.net', NULL, NULL, 0, 1, 0, 1),
 (132, 109, 'Pengkom Ceria', 'pengkom@codemastery.net', NULL, NULL, 0, 1, 0, 1),
-(133, 109, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 0, 1, 0, 1);
+(133, 109, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 0, 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -591,7 +591,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`user_id`, `created`, `name`, `username`, `pass`, `email`, `no_telp`, `website`, `reputation`, `role_id`, `uri`, `pict`, `gravatar`, `bio`, `status`, `hash`) VALUES
 (-1, '2015-10-10 06:57:12', 'Anonymous', 'anonymous', '294de3557d9d00b3d2d8a1e6aab028cf', 'anon@codemastery.net', '08971238788', NULL, -9999, 4, '-', '-', NULL, '', 'non-active', ''),
-(1, '2015-04-18 09:09:31', 'Maulana Hey Hey', 'maulcux', 'c50fe8f480de05e96e96682e5a559900', 'maulcux@gmail.com', '', NULL, 0, 1, 'users/profile/maulcux', 'assets/images/users/1.jpg', NULL, '', 'active', ''),
+(1, '2015-04-18 09:09:31', 'Maulana Hey Hey', 'maulshh', 'c50fe8f480de05e96e96682e5a559900', 'maulshh@gmail.com', '', NULL, 0, 1, 'users/profile/maulshh', 'assets/images/users/1.jpg', NULL, '', 'active', ''),
 (2, '2015-09-02 06:11:42', 'Pengkom Ceria', 'pengkom', '3416ebd4264688ea76e79997f3378733', 'pengkom@codemastery.net', '', NULL, 0, 2, 'users/profile/pengkom', 'assets/images/users/2.jpg', NULL, '', 'active', ''),
 (3, '2015-09-22 15:36:50', 'emif UB', 'emif', 'eb8e00577d6af44104611efdbc775e1b', 'emif@codemaster.net', '', NULL, 0, 2, 'users/profile/emif', 'assets/images/users/3.jpg', NULL, '', 'active', ''),
 (4, '2015-10-11 08:20:23', 'maulana', 'maul', 'c50fe8f480de05e96e96682e5a559900', 'me_ula@ymail.com', '', NULL, 0, 3, 'users/profile/maul', 'assets/images/users/4.jpg', NULL, '', 'active', ''),
