@@ -135,7 +135,6 @@
         $('#input5').removeAttr('checked');
         $('#input6').val('');
         $("#form-post-type").attr("action", "<?= base_url('post_types/add');?>");
-        $("#form-tambah").dialog("open");
     }
 
     function edit(data) {
@@ -153,8 +152,8 @@
         else $('#input5').removeAttr('checked');
         $('#input6').val(data[6]);
         $("#form-post-type").attr("action", "<?= base_url('post_types/edit');?>/" + data[0]);
-        $("#form-tambah").dialog("open");
     }
+    
     function hapus(id) {
         var r = confirm("Every post with this type will also deleted. Are you sure?");
         if (r)

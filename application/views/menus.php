@@ -50,13 +50,13 @@
                             Body
                         </div>
                         <div class="col-md-8 form-group">
-                            <input class="form-control" id="input1" type="content" name="content">
+                            <input class="form-control" id="input1" type="text" name="content">
                         </div>
                         <div class="col-md-4">
                             Title
                         </div>
                         <div class="col-md-8 form-group">
-                            <input class="form-control" id="input2" type="content" name="title">
+                            <input class="form-control" id="input2" type="text" name="title">
                         </div>
                         <div class="col-md-4">
                             URL

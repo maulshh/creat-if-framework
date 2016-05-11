@@ -36,8 +36,8 @@
                                 <div class="form-group col-md-6">
                                     <span class="pull-right">
                                         <?php if($editable){ ?>
-                                        <br>
-                                        <a data-toggle="modal" data-target="#modalpass" href="#chpass">ubah password</a>
+                                            <br>
+                                            <a data-toggle="modal" data-target="#modalpass" href="#chpass">ubah password</a>
                                         <?php }?>
                                     </span>
                                 </div>
@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Posisi</label>
-                                    <p class="form-control" ><?= $profile->role_name?></p>
+                                    <p class="form-control" ><?= $profile->role_name." ".$profile->tingkat?></p>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Status</label>
@@ -88,7 +88,7 @@
                     <div class="row">
                         <input type="hidden" name="user_id" value="<?= $profile->user_id?>">
                         <div class="form-group col-md-8">
-                            <input type="file" name="file" title="pilih file dari komputer anda">
+                            <input type="file" name="userfile" title="pilih file dari komputer anda">
                             <p class="help-block">pilih file dari komputer anda</p>
                         </div>
                         <button class="btn btn-lg btn-github" type="submit"><i class="fa fa-upload"> </i> Upload</button>
@@ -103,33 +103,33 @@
     <div class="modal-dialog" style="width: 380px">
         <div class="modal-content">
             <form action="<?= base_url('users/change_pass')?>" method="post">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                Ubah Password
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <input type="hidden" name="user_id" value="<?= $profile->user_id?>">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Old Password</label>
-                            <input type="password" class="form-control" name="old-pass">
-                            <br>
-                        </div>
-                        <div class="form-group">
-                            <label>New Password</label>
-                            <input type="password" class="form-control" name="pass">
-                        </div>
-                        <div class="form-group">
-                            <label>Retype Password</label>
-                            <input type="password" class="form-control" name="re-pass">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    Ubah Password
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="hidden" name="user_id" value="<?= $profile->user_id?>">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Old Password</label>
+                                <input type="password" class="form-control" name="old-pass">
+                                <br>
+                            </div>
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <input type="password" class="form-control" name="pass">
+                            </div>
+                            <div class="form-group">
+                                <label>Retype Password</label>
+                                <input type="password" class="form-control" name="re-pass">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-lg btn-github pull-right" type="submit"> </i> Submit</button>
-            </div>
+                <div class="modal-footer">
+                    <button class="btn btn-lg btn-github pull-right" type="submit"> </i> Submit</button>
+                </div>
             </form>
         </div>
     </div>

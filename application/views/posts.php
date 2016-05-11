@@ -1,6 +1,3 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js" type="text/javascript"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-sanitize.js" type="text/javascript"></script>
-<?php //print_r($all)?>
 <style>
     .preview {
         overflow: auto;
@@ -11,7 +8,7 @@
         border: solid rgba(96, 96, 96, 0.100) 1px;
     }
 </style>
-<div class='row' id="MainCtrl" ng-app="app"  ng-controller="MainCtrl">
+<div class='row'>
     <div class='col-md-12'>
         <div class='box box-primary collapsed-box'>
             <div class='box-header'>
@@ -176,7 +173,8 @@
     <?=$upload?>
 </div><!-- ./row -->
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-sanitize.js" type="text/javascript"></script>
 <script src="<?= base_url('assets'); ?>/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>
 <script type="text/javascript" language="javascript" class="init">
 

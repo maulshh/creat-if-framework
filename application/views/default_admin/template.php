@@ -77,23 +77,33 @@
                 $(this).val(vals);
             });
             $(".ui-dialog-titlebar-close").addClass('btn btn-default btn-flat').html('<i style="margin-top:-1px" class="fa fa-times"></i>');
-        });
-        $(document).ready(function () {
+
             $('.tip').tooltip();
             $('.alert').click(function () {
                 $(this).fadeTo(500, 0).slideUp(500, function () {
                     $(this).remove();
                 });
             });
+
             window.setTimeout(function () {
                 $(".alert").fadeTo(500, 0).slideUp(500, function () {
                     $(this).remove();
                 });
             }, 8000);
+
+            $('.date-picker').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: '<?=str_replace(array('d', 'm', 'Y'), array('dd', 'mm', 'yy'), DATE_FORMAT)?>'
+            });
+
+            $(".kembali").click(function(){
+                history.go(-1);
+            });
         });
     </script>
 </head>
-<body class="skin-blue">
+<body class="skin-blue" id="MainCtrl" ng-app="app" ng-controller="MainCtrl">
 
 <div class="wrapper">
 
@@ -144,36 +154,42 @@
                 $pos = explode('-', $menu->position);
                 while ($depth > count($pos)){
                 ?>
-            </ul>
-            </li>
-            <?php $depth--;
-            }
-            $depth = count($pos);
-            if ($menu->uri == ''){
-                ?>
-                <li class="header"><?= $menu->content ?></li>
-            <?php } else if ($menu->uri != '#'){ ?>
-                <li title="<?= $menu->title ?>" class="<?php if ($pages == $menu->content) echo 'active' ?>">
-                    <a href="<?= base_url($menu->uri); ?>">
+                    </ul>
+                </li>
+                <?php $depth--;
+                }
+                $depth = count($pos);
+                if ($menu->uri == ''){
+                    ?>
+                    <li class="header"><?= $menu->content ?></li>
+                <?php } else if ($menu->uri != '#'){ ?>
+                    <li title="<?= $menu->title ?>" class="<?php if ($pages == $menu->content) echo 'active' ?>">
+                        <a href="<?= base_url($menu->uri); ?>">
+                            <i class="fa fa-<?= $menu->note ?>"></i>
+                            <span>
+                                <?= $menu->content ?>
+                            </span>
+                        </a>
+                    </li>
+                <?php } else { ?>
+                <li class="treeview <?php if (isset($parent_page) && $parent_page == $menu->content) echo 'active'; ?>">
+                    <a href="#">
                         <i class="fa fa-<?= $menu->note ?>"></i>
-	                    <span>
+                        <span>
                             <?= $menu->content ?>
+                            <i class="fa fa-angle-left pull-right"></i>
                         </span>
                     </a>
+                    <ul class="treeview-menu">
+                        <?php }
+                        }
+                        while ($depth > 1){
+                        ?>
+                    </ul>
                 </li>
-            <?php } else { ?>
-            <li class="treeview <?php if (isset($parent_page) && $parent_page == $menu->content) echo 'active'; ?>">
-                <a href="#">
-                    <i class="fa fa-<?= $menu->note ?>"></i>
-                    <span>
-                        <?= $menu->content ?>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <?php }
-                    } ?>
-                </ul>
+                <?php $depth--;
+                } ?>
+            </ul>
         </section>
         <!-- /.sidebar -->
     </aside>
