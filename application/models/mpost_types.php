@@ -7,10 +7,10 @@ class Mpost_types extends EMIF_Model {
         $this->set_table('post_types');
     }
     
-    public function get($where){ //overrides parent method get
+    public function get($where = false, $like = false, $order = false, $group = false, $select = false, $limit = false){ //overrides parent method get
     	if($where && !is_array($where))
     		$where = array('post_type_id' => $where); // when where is not false and only a single id
-    	return parent::get($where);
+    	return parent::get($where, $like, $order, $group, $select, $limit);
     }
 
     public function get_all(){

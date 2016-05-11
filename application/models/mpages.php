@@ -8,12 +8,12 @@ class Mpages extends EMIF_Model {
         $this->set_table('pages');
     }
 
-    public function get($where = false, $like = false, $order = false, $group = false, $select = false){ //overrides parent method get
+    public function get($where = false, $like = false, $order = false, $group = false, $select = false, $limit = false){ //overrides parent method get
         if($where && !is_array($where))
             $where = array('nodes.node_id' => $where); // when where is not false and only a single id
         $this->db->join('nodes', 'nodes.node_id = pages.page_id');
         $this->db->join('users', 'users.user_id = nodes.user_id');
-        return parent::get(array_merge(array('module' => 'page'), $where), $like, $order, $group, $select?$select:'users.*, nodes.* ,pages.*');
+        return parent::get(array_merge(array('module' => 'page'), $where), $like, $order, $group, $select?$select:'users.*, nodes.* ,pages.*', $limit);
     }
 
     public function get_many($where = false, $like = false, $order = false, $group = false, $select = false, $limit = false, $array = false){ //overrides parent method get_many
@@ -58,6 +58,15 @@ class Mpages extends EMIF_Model {
     public function commented($id){
         $this->db->set('comment_count', 'comment_count+1', false);
         return parent::set(array('page_id' => $id), array());
+    }
+
+    public function delete($where)
+    {
+        if ($where && !is_array($where))
+            $where = array('nodes.node_id' => $where); // when where is not false and only a single id
+        if($this->mnodes->delete(array_merge(array('module' => 'page'), $where)))
+            return true;
+        return false;
     }
 }
 

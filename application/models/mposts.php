@@ -8,13 +8,13 @@ class Mposts extends EMIF_Model {
         $this->set_table('posts');
     }
 
-    public function get($where = false, $like = false, $order = false, $group = false, $select = false){ //overrides parent method get
+    public function get($where = false, $like = false, $order = false, $group = false, $select = false, $limit = false){ //overrides parent method get
         if($where && !is_array($where))
     		$where = array('nodes.node_id' => $where); // when where is not false and only a single id
     	$this->db->join('nodes', 'nodes.node_id = posts.post_id');
         $this->db->join('users', 'users.user_id = nodes.user_id');
         $this->db->join('post_types', 'post_types.post_type_id = posts.post_type_id');
-        return parent::get($where, $like, $order, $group, $select?$select:"users.*, post_types.*, posts.*, nodes.*");
+        return parent::get($where, $like, $order, $group, $select?$select:"users.*, post_types.*, posts.*, nodes.*", $limit);
     }
 
     public function get_post_type($where){
@@ -91,5 +91,14 @@ class Mposts extends EMIF_Model {
         else
             $this->db->set('rateup', 'rateup+1', false);
         return parent::set(array('post_id' => $id), array());
+    }
+
+    public function delete($where)
+    {
+        if ($where && !is_array($where))
+            $where = array('nodes.node_id' => $where); // when where is not false and only a single id
+        if($this->mnodes->delete(array_merge(array('module' => 'post'), $where)))
+            return true;
+        return false;
     }
 }

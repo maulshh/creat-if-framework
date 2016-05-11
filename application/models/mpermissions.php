@@ -7,7 +7,7 @@ class Mpermissions extends EMIF_Model {
         $this->set_table('role_permissions');
     }
     
-    public function get($role, $module, $permission){ //overrides parent method get
+    public function get($role, $module, $permission, $group = false, $select = false, $limit = false){ //overrides parent method get
         $where = array('role_id' => $role,
         				'module' => $module);
         $this->db->like('permission','-'.$permission.'-');

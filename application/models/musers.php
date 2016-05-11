@@ -20,7 +20,7 @@ class Musers extends EMIF_Model
         return parent::get(array_merge($where, array('nodes.module' => 'post')), $like, $order, $group);
     }
 
-    public function get($where = false, $like = false, $order = false, $group = false)
+    public function get($where = false, $like = false, $order = false, $group = false, $select = false, $limit = false)
     { //overrides parent method get
         if ($where && !is_array($where))
             $where = array('user_id' => $where); // when where is not false and only a single id
@@ -28,7 +28,7 @@ class Musers extends EMIF_Model
         return parent::get($where, $like, $order, $group);
     }
 
-    public function get_many($where = false, $like = false, $order = false, $group = false, $limit = false)
+    public function get_many($where = false, $like = false, $order = false, $group = false, $select = false, $limit = false, $array = false)
     { //overrides parent method get_many
         $this->db->select('roles.*, users.*');
         $this->db->join('roles', 'roles.role_id = users.role_id');

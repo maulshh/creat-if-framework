@@ -7,7 +7,7 @@ class Msites extends EMIF_Model {
         $this->set_table('sites');
     }
 
-    public function get($where = false, $like = false){ //overrides parent method get
+    public function get($where = false, $like = false, $order = false, $group = false, $select = false, $limit = false){ //overrides parent method get
         if(!$where)
             return parent::get(array('primary'=>1), $like);
         if(!is_array($where))
