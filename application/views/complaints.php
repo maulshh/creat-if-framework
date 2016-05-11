@@ -156,7 +156,7 @@
                     comment_id: comment_id
                 },
                 success: function (result) {
-                    if(result = "Comment deleted!"){
+                    if(result == "Comment deleted!"){
                     } else
                         alert(result);
                 }
