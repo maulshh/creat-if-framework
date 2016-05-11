@@ -21,7 +21,7 @@
 $sql_details = array(
     'user' => DB_USERNAME,
     'pass' => DB_PASS,
-    'db'   => 'emif_framework',
+    'db'   => DB_DATABASE,
     'host' => 'localhost'
 );
 

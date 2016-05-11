@@ -78,7 +78,7 @@ $db['default'] = array(
     'hostname' => 'localhost',
     'username' => DB_USERNAME,
     'password' => DB_PASS,
-    'database' => 'emif_framework',
+    'database' => DB_DATABASE,
     'dbdriver' => 'mysqli',
     'dbprefix' => '',
     'pconnect' => TRUE,
@@ -94,4 +94,3 @@ $db['default'] = array(
     'failover' => array(),
     'save_queries' => TRUE
 );
-
