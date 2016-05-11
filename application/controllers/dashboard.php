@@ -17,6 +17,7 @@ class Dashboard extends EMIF_Controller
         }
         $this->data = NULL;
         $this->data['menus'] = $this->mmenus->get_menus('admin-page', $this->session->userdata('role_id'));
+        $this->data['header_menus'] = $this->mmenus->get_menus('header-admin', $this->session->userdata('role_id'));
 
         return true;
     }
@@ -29,40 +30,50 @@ class Dashboard extends EMIF_Controller
         $this->load->view('template', $this->data);
     }
 
-    public function upload_image($ajax = false)
+    public function upload_image($ajax = false, $overwrite = true)
     {
         $path = $this->input->post('path');
-        if($path == ''){
+        if ($path == '') {
             $path = 'assets/images/uploads';
         }
-        $this->load->helpers('upload');
-        $handle = new upload($_FILES['image_field']);
-        if ($handle->uploaded) {
+        $this->load->library('Imageupload');
+        $this->imageupload->upload($_FILES['userfile']);
+
+        $string = '';
+        if ($this->imageupload->uploaded) {
             if (($name = trim($this->input->post('name'))) == '') {
-                $name = $handle->file_src_name_body;
+                $name = $this->imageupload->file_src_name_body;
             }
-            if (!$ajax) echo "for image $name:";
-            $sizes = array(150, 300, 768);
+            if (!$ajax) $string .= "for image $name:";
+            if ($this->input->post('size') == '')
+                $sizes = array(768);
+            else
+                $sizes = explode(",", $this->input->post('size'));
             foreach ($sizes as $size) {
-                if ($size == 768) {
-                    $handle->file_new_name_body = $name;
+                if ($size == end($sizes)) {
+                    $this->imageupload->file_new_name_body = $name;
                 } else {
-                    $handle->file_new_name_body = $name . '-' . $size . 'x' . $size;
+                    $this->imageupload->file_new_name_body = $name . '-' . $size . 'x' . $size;
                 }
-                $handle->file_new_name_ext = 'jpg';
-                $handle->file_force_extension = true;
-                $handle->image_resize = true;
-                $handle->image_x = $size;
-                $handle->image_ratio_y = true;
-                $handle->process(DOC_ROOT . $path);
-                if ($handle->processed) {
-                    if (!$ajax) echo '<br>image resized for ' . $size;
+                $this->imageupload->file_new_name_ext = 'jpg';
+                $this->imageupload->file_force_extension = true;
+                $this->imageupload->file_overwrite = $overwrite;
+                $this->imageupload->image_resize = true;
+                $this->imageupload->image_x = $size;
+                $this->imageupload->image_ratio_y = true;
+                $this->imageupload->process(DOC_ROOT . $path);
+                if ($this->imageupload->processed) {
+                    if (!$ajax) $string .= '<br>image resized for ' . $size;
+                    $string .= "Image uploaded in <br>" . base_url($path . "/" . $this->imageupload->file_dst_name);
                 } else {
-                    echo 'error : ' . $handle->error;
+                    echo 'error : ' . $this->imageupload->error;
                     break;
                 }
             }
-            $handle->clean();
+            $this->imageupload->clean();
+            echo "upload sukses!<br><br>" . $string;
+        } else {
+            echo "Image gagal diupload!";
         }
         if (!$ajax)
             redirect(base_url('dashboard'));

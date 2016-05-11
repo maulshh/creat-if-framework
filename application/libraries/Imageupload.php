@@ -33,9 +33,8 @@
  * @license   http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright Colin Verot
  */
-class upload {
-
-
+class Imageupload {
+    
     /**
      * Class version
      *
@@ -1989,7 +1988,7 @@ class upload {
     /**
      * Constructor, for PHP5+
      */
-    function  __construct($file, $lang = 'en_GB')  {
+    function  __construct($file = '', $lang = 'en_GB')  {
         $this->upload($file, $lang);
     }
 
