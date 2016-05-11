@@ -3,9 +3,9 @@
 define('WEEK', 604800);
 define('TIME', 'Y-m-d h:m:s');
 define('DOC_ROOT', $_SERVER['DOCUMENT_ROOT'].str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']));
-define('DB_USERNAME','');
-define('DB_PASS','');
-define('DB_DATABASE','');
+define('DB_USERNAME','world');
+define('DB_PASS','jalan masjid');
+define('DB_DATABASE','emif_framework');
 
 /*
 |--------------------------------------------------------------------------

@@ -1,20 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Apr 04, 2016 at 10:37 AM
--- Server version: 5.5.34
--- PHP Version: 5.4.4
+-- Host: 127.0.0.1
+-- Generation Time: May 11, 2016 at 03:41 PM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 5.5.34
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `emif_framework`
@@ -26,13 +26,11 @@ SET time_zone = "+00:00";
 -- Table structure for table `cdn_list`
 --
 
-CREATE TABLE IF NOT EXISTS `cdn_list` (
+CREATE TABLE `cdn_list` (
   `name` varchar(40) NOT NULL,
   `uri` varchar(300) NOT NULL,
   `type` varchar(10) NOT NULL,
-  `package` varchar(20) NOT NULL,
-  PRIMARY KEY (`name`),
-  UNIQUE KEY `uri` (`uri`)
+  `package` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -48,7 +46,7 @@ INSERT INTO `cdn_list` (`name`, `uri`, `type`, `package`) VALUES
 -- Table structure for table `comments`
 --
 
-CREATE TABLE IF NOT EXISTS `comments` (
+CREATE TABLE `comments` (
   `comment_id` int(11) NOT NULL,
   `parent_id` int(11) NOT NULL,
   `name` varchar(80) NOT NULL,
@@ -58,9 +56,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `comment_count` int(11) NOT NULL DEFAULT '0',
   `rateable` tinyint(1) NOT NULL DEFAULT '1',
   `rateup` int(11) NOT NULL DEFAULT '0',
-  `public` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`comment_id`),
-  KEY `parent_id` (`parent_id`)
+  `public` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -68,25 +64,24 @@ CREATE TABLE IF NOT EXISTS `comments` (
 --
 
 INSERT INTO `comments` (`comment_id`, `parent_id`, `name`, `email`, `no_telp`, `website`, `comment_count`, `rateable`, `rateup`, `public`) VALUES
-(62, 34, 'Maulana', 'maulshh@gmail.com', NULL, 'http://codemastery.net', 1, 1, 0, 1),
-(63, 62, 'Maulana', 'maulshh@gmail.com', NULL, 'http://codemastery.net', 1, 1, 0, 1),
-(65, 63, 'Maulana', 'maulshh@gmail.com', NULL, '', 0, 1, 0, 1),
-(88, 34, 'Maulana', 'maulshh@gmail.com', NULL, '', 0, 1, 0, 1),
-(113, 38, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 0, 1, 0, 1),
-(114, 108, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 1, 1, 0, 1),
-(115, 108, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 0, 1, 0, 1),
-(116, 114, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 2, 1, 0, 1),
-(117, 116, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 0, 1, 0, 1),
-(118, 116, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 0, 1, 0, 1),
-(119, 107, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 0, 1, 0, 1),
-(124, 45, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 0, 1, 0, 1),
-(125, 45, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 0, 1, 0, 1),
-(127, 45, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 0, 1, 0, NULL),
+(62, 34, 'Maulana', 'maulcux@gmail.com', NULL, 'http://codemastery.net', 1, 1, 0, 1),
+(63, 62, 'Maulana', 'maulcux@gmail.com', NULL, 'http://codemastery.net', 1, 1, 0, 1),
+(65, 63, 'Maulana', 'maulcux@gmail.com', NULL, '', 0, 1, 0, 1),
+(88, 34, 'Maulana', 'maulcux@gmail.com', NULL, '', 0, 1, 0, 1),
+(113, 38, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 0, 1, 0, 1),
+(114, 108, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 1, 1, 0, 1),
+(115, 108, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 0, 1, 0, 1),
+(116, 114, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 2, 1, 0, 1),
+(117, 116, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 0, 1, 0, 1),
+(118, 116, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 0, 1, 0, 1),
+(119, 107, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 0, 1, 0, 1),
+(125, 45, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 0, 1, 0, 1),
+(127, 45, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 0, 1, 0, NULL),
 (129, 109, 'Pengkom Ceria', 'pengkom@codemastery.net', NULL, NULL, 1, 1, 0, 1),
 (130, 129, 'Pengkom Ceria', 'pengkom@codemastery.net', NULL, NULL, 1, 1, 0, 1),
 (131, 130, 'Pengkom Ceria', 'pengkom@codemastery.net', NULL, NULL, 0, 1, 0, 1),
 (132, 109, 'Pengkom Ceria', 'pengkom@codemastery.net', NULL, NULL, 0, 1, 0, 1),
-(133, 109, 'Maulana', 'maulshh@gmail.com', NULL, NULL, 0, 1, 0, 1);
+(133, 109, 'Maulana', 'maulcux@gmail.com', NULL, NULL, 0, 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -94,16 +89,11 @@ INSERT INTO `comments` (`comment_id`, `parent_id`, `name`, `email`, `no_telp`, `
 -- Table structure for table `menus`
 --
 
-CREATE TABLE IF NOT EXISTS `menus` (
+CREATE TABLE `menus` (
   `menu_id` int(11) NOT NULL,
   `role_id` varchar(20) NOT NULL,
   `position` varchar(15) NOT NULL,
-  `module_target` varchar(30) NOT NULL,
-  PRIMARY KEY (`position`,`module_target`),
-  KEY `node_id` (`role_id`),
-  KEY `role_id` (`role_id`),
-  KEY `node_id_2` (`menu_id`),
-  KEY `role_id_2` (`role_id`)
+  `module_target` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -157,8 +147,8 @@ INSERT INTO `menus` (`menu_id`, `role_id`, `position`, `module_target`) VALUES
 -- Table structure for table `nodes`
 --
 
-CREATE TABLE IF NOT EXISTS `nodes` (
-  `node_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `nodes` (
+  `node_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `module` varchar(30) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -167,10 +157,8 @@ CREATE TABLE IF NOT EXISTS `nodes` (
   `title` varchar(80) NOT NULL,
   `content` text NOT NULL,
   `note` varchar(225) NOT NULL,
-  `status` varchar(30) NOT NULL,
-  PRIMARY KEY (`node_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=134 ;
+  `status` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `nodes`
@@ -275,7 +263,6 @@ INSERT INTO `nodes` (`node_id`, `user_id`, `module`, `created`, `modified`, `uri
 (120, 1, 'menu', '2015-10-10 03:07:36', '2015-11-15 23:04:42', 'dashboard', 'dashboard', 'Dashboard', '', '1'),
 (121, 1, 'comment', '2015-10-10 03:11:10', '2015-10-10 03:11:10', 'permalink/daftar-ulang-genap-2015#comment-121', '', 'asd', '', 'published'),
 (122, 1, 'comment', '2015-10-10 03:12:31', '2015-10-10 03:12:31', 'permalink/daftar-ulang-genap-2015#comment-122', '', '', '', 'published'),
-(124, 1, 'comment', '2015-10-10 08:06:34', '2015-10-10 08:06:34', 'contact-us#comment-124', 'sesuatu', 'Apakah hmif itu?', '', 'unverified'),
 (125, 1, 'comment', '2015-10-10 08:13:51', '2015-10-11 11:33:31', 'contact-us#comment-125', 'coba', 'kapan desain web hmif selesai?', '', 'published'),
 (127, 1, 'comment', '2015-10-11 08:12:34', '2015-10-11 08:12:35', 'contact-us#comment-127', 'Hemm sesuatu', 'Apakah ini verifiable?', '', 'unverified'),
 (128, 1, 'comment', '2015-10-14 09:59:14', '2015-10-14 09:59:14', 'permalink/daftar-ulang-2015#comment-128', '', 'sfsdf', '', 'published'),
@@ -291,15 +278,13 @@ INSERT INTO `nodes` (`node_id`, `user_id`, `module`, `created`, `modified`, `uri
 -- Table structure for table `pages`
 --
 
-CREATE TABLE IF NOT EXISTS `pages` (
+CREATE TABLE `pages` (
   `page_id` int(11) NOT NULL,
   `cover` varchar(80) NOT NULL,
   `commentable` tinyint(1) DEFAULT NULL,
   `comment_count` int(11) NOT NULL,
   `view` varchar(50) NOT NULL,
-  `post_category` int(11) DEFAULT NULL,
-  PRIMARY KEY (`page_id`),
-  KEY `post_category` (`post_category`)
+  `post_category` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -328,7 +313,7 @@ INSERT INTO `pages` (`page_id`, `cover`, `commentable`, `comment_count`, `view`,
 -- Table structure for table `posts`
 --
 
-CREATE TABLE IF NOT EXISTS `posts` (
+CREATE TABLE `posts` (
   `post_id` int(11) NOT NULL,
   `post_type_id` int(11) DEFAULT NULL,
   `subtype` varchar(30) NOT NULL,
@@ -342,10 +327,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `comment_count` int(11) NOT NULL,
   `rateup` int(11) NOT NULL,
   `public` smallint(6) NOT NULL,
-  `featured` tinyint(1) NOT NULL,
-  PRIMARY KEY (`post_id`),
-  UNIQUE KEY `permalink` (`permalink`),
-  KEY `node_id` (`post_type_id`)
+  `featured` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -374,16 +356,15 @@ INSERT INTO `posts` (`post_id`, `post_type_id`, `subtype`, `preview`, `thumbnail
 -- Table structure for table `post_types`
 --
 
-CREATE TABLE IF NOT EXISTS `post_types` (
-  `post_type_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `post_types` (
+  `post_type_id` int(11) NOT NULL,
   `post_type` varchar(30) NOT NULL,
   `content_type` varchar(30) NOT NULL,
   `commentable` tinyint(1) NOT NULL,
   `taggable` tinyint(1) NOT NULL,
   `rateable` tinyint(1) NOT NULL,
-  `view` varchar(50) NOT NULL,
-  PRIMARY KEY (`post_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+  `view` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `post_types`
@@ -402,11 +383,10 @@ INSERT INTO `post_types` (`post_type_id`, `post_type`, `content_type`, `commenta
 -- Table structure for table `ratings`
 --
 
-CREATE TABLE IF NOT EXISTS `ratings` (
+CREATE TABLE `ratings` (
   `user_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
-  `rate` smallint(6) NOT NULL,
-  PRIMARY KEY (`user_id`,`post_id`)
+  `rate` smallint(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -415,11 +395,10 @@ CREATE TABLE IF NOT EXISTS `ratings` (
 -- Table structure for table `roles`
 --
 
-CREATE TABLE IF NOT EXISTS `roles` (
-  `role_id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(30) NOT NULL,
-  PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+CREATE TABLE `roles` (
+  `role_id` int(11) NOT NULL,
+  `role_name` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `roles`
@@ -438,14 +417,12 @@ INSERT INTO `roles` (`role_id`, `role_name`) VALUES
 -- Table structure for table `role_permissions`
 --
 
-CREATE TABLE IF NOT EXISTS `role_permissions` (
-  `permission_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `role_permissions` (
+  `permission_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   `module` varchar(30) NOT NULL,
-  `permission` varchar(80) NOT NULL,
-  PRIMARY KEY (`role_id`,`module`,`permission`),
-  UNIQUE KEY `permission_id` (`permission_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=56 ;
+  `permission` varchar(80) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `role_permissions`
@@ -499,7 +476,7 @@ INSERT INTO `role_permissions` (`permission_id`, `role_id`, `module`, `permissio
 -- Table structure for table `sites`
 --
 
-CREATE TABLE IF NOT EXISTS `sites` (
+CREATE TABLE `sites` (
   `primary` int(11) NOT NULL DEFAULT '1',
   `site_name` varchar(225) NOT NULL,
   `site_title` varchar(225) NOT NULL,
@@ -508,15 +485,15 @@ CREATE TABLE IF NOT EXISTS `sites` (
   `date_format` varchar(20) NOT NULL,
   `rows_per_page` int(11) NOT NULL,
   `template` varchar(45) NOT NULL,
-  PRIMARY KEY (`primary`)
+  `admin_template` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sites`
 --
 
-INSERT INTO `sites` (`primary`, `site_name`, `site_title`, `site_url`, `site_logo`, `date_format`, `rows_per_page`, `template`) VALUES
-(1, 'Framework HMIF', 'Official Framework HMIF', 'http://hmif.ub.ac.id', '', 'm-d-Y', 10, 'emif_template');
+INSERT INTO `sites` (`primary`, `site_name`, `site_title`, `site_url`, `site_logo`, `date_format`, `rows_per_page`, `template`, `admin_template`) VALUES
+(1, 'Framework HMIF', 'Official Framework HMIF', 'http://hmif.ub.ac.id', 'http://hmif.ub.ac.id/assets/logo.png', 'm-d-Y', 10, 'emif_template', 'top_nav_admin');
 
 -- --------------------------------------------------------
 
@@ -524,11 +501,9 @@ INSERT INTO `sites` (`primary`, `site_name`, `site_title`, `site_url`, `site_log
 -- Table structure for table `tags`
 --
 
-CREATE TABLE IF NOT EXISTS `tags` (
+CREATE TABLE `tags` (
   `post_id` int(11) NOT NULL,
-  `tag` varchar(225) NOT NULL,
-  PRIMARY KEY (`post_id`,`tag`),
-  KEY `post_id` (`post_id`)
+  `tag` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -563,8 +538,8 @@ INSERT INTO `tags` (`post_id`, `tag`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `name` varchar(80) NOT NULL,
   `username` varchar(80) NOT NULL,
@@ -579,11 +554,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `gravatar` varchar(300) DEFAULT NULL,
   `bio` text NOT NULL,
   `status` varchar(25) NOT NULL,
-  `hash` varchar(32) NOT NULL,
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `username` (`username`),
-  KEY `role_id` (`role_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+  `hash` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -591,13 +563,138 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`user_id`, `created`, `name`, `username`, `pass`, `email`, `no_telp`, `website`, `reputation`, `role_id`, `uri`, `pict`, `gravatar`, `bio`, `status`, `hash`) VALUES
 (-1, '2015-10-10 06:57:12', 'Anonymous', 'anonymous', '294de3557d9d00b3d2d8a1e6aab028cf', 'anon@codemastery.net', '08971238788', NULL, -9999, 4, '-', '-', NULL, '', 'non-active', ''),
-(1, '2015-04-18 09:09:31', 'Maulana Hey Hey', 'maulshh', 'c50fe8f480de05e96e96682e5a559900', 'maulshh@gmail.com', '', NULL, 0, 1, 'users/profile/maulshh', 'assets/images/users/1.jpg', NULL, '', 'active', ''),
+(1, '2015-04-18 09:09:31', 'Maulana Hey Hey', 'maulcux', 'c50fe8f480de05e96e96682e5a559900', 'maulcux@gmail.com', '', NULL, 0, 1, 'users/profile/maulcux', 'assets/images/users/1.jpg', NULL, '', 'active', ''),
 (2, '2015-09-02 06:11:42', 'Pengkom Ceria', 'pengkom', '3416ebd4264688ea76e79997f3378733', 'pengkom@codemastery.net', '', NULL, 0, 2, 'users/profile/pengkom', 'assets/images/users/2.jpg', NULL, '', 'active', ''),
 (3, '2015-09-22 15:36:50', 'emif UB', 'emif', 'eb8e00577d6af44104611efdbc775e1b', 'emif@codemaster.net', '', NULL, 0, 2, 'users/profile/emif', 'assets/images/users/3.jpg', NULL, '', 'active', ''),
 (4, '2015-10-11 08:20:23', 'maulana', 'maul', 'c50fe8f480de05e96e96682e5a559900', 'me_ula@ymail.com', '', NULL, 0, 3, 'users/profile/maul', 'assets/images/users/4.jpg', NULL, '', 'active', ''),
 (5, '2015-11-16 15:32:59', 'infokom baper', 'infokom', 'ddff6661648d7d30476a0f7ce7434042', 'infokom@hmif.ub.ac.id', '', NULL, 0, 2, 'users/profile/infokom', 'assets/images/users/5.jpg', NULL, '', 'active', ''),
 (6, '2015-12-14 02:51:41', 'Maulana Muhammad', '125150200111148', 'c50fe8f480de05e96e96682e5a559900', '125150200111148@mail.ub.ac.id', '', NULL, 0, 5, 'users/profile/125150200111148', 'assets/images/users/6.jpg', NULL, '', 'active', 'ee1abc6b5f7c6acb34ad076b05d40815');
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `cdn_list`
+--
+ALTER TABLE `cdn_list`
+  ADD PRIMARY KEY (`name`),
+  ADD UNIQUE KEY `uri` (`uri`);
+
+--
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`comment_id`),
+  ADD KEY `parent_id` (`parent_id`);
+
+--
+-- Indexes for table `menus`
+--
+ALTER TABLE `menus`
+  ADD PRIMARY KEY (`position`,`module_target`),
+  ADD KEY `node_id` (`role_id`),
+  ADD KEY `role_id` (`role_id`),
+  ADD KEY `node_id_2` (`menu_id`),
+  ADD KEY `role_id_2` (`role_id`);
+
+--
+-- Indexes for table `nodes`
+--
+ALTER TABLE `nodes`
+  ADD PRIMARY KEY (`node_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `pages`
+--
+ALTER TABLE `pages`
+  ADD PRIMARY KEY (`page_id`),
+  ADD KEY `post_category` (`post_category`);
+
+--
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`post_id`),
+  ADD UNIQUE KEY `permalink` (`permalink`),
+  ADD KEY `node_id` (`post_type_id`);
+
+--
+-- Indexes for table `post_types`
+--
+ALTER TABLE `post_types`
+  ADD PRIMARY KEY (`post_type_id`);
+
+--
+-- Indexes for table `ratings`
+--
+ALTER TABLE `ratings`
+  ADD PRIMARY KEY (`user_id`,`post_id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`role_id`);
+
+--
+-- Indexes for table `role_permissions`
+--
+ALTER TABLE `role_permissions`
+  ADD PRIMARY KEY (`role_id`,`module`,`permission`),
+  ADD UNIQUE KEY `permission_id` (`permission_id`);
+
+--
+-- Indexes for table `sites`
+--
+ALTER TABLE `sites`
+  ADD PRIMARY KEY (`primary`);
+
+--
+-- Indexes for table `tags`
+--
+ALTER TABLE `tags`
+  ADD PRIMARY KEY (`post_id`,`tag`),
+  ADD KEY `post_id` (`post_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD KEY `role_id` (`role_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `nodes`
+--
+ALTER TABLE `nodes`
+  MODIFY `node_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+--
+-- AUTO_INCREMENT for table `post_types`
+--
+ALTER TABLE `post_types`
+  MODIFY `post_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `role_permissions`
+--
+ALTER TABLE `role_permissions`
+  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- Constraints for dumped tables
 --

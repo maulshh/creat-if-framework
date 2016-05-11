@@ -79,8 +79,14 @@
                                 </div>
                                 <div class="col-xs-4">
                                     <div class="form-group">
-                                        <label>Site URL</label>
+                                        <label>Template</label>
                                         <input class="form-control" type="text" name="template" value="<?= TEMPLATE?>">
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="form-group">
+                                        <label>Admin Template</label>
+                                        <input class="form-control" type="text" name="admin_template" value="<?= ADMIN_TEMPLATE?>">
                                     </div>
                                 </div>
                             </div>
