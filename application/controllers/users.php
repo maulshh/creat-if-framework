@@ -17,17 +17,17 @@ class Users extends EMIF_Controller
         }
         $this->data = NULL;
         $this->data['menus'] = $this->mmenus->get_menus('admin-page', $this->session->userdata('role_id'));
-
+        $this->data['header_menus'] = $this->mmenus->get_menus('header-admin', $this->session->userdata('role_id'));
         return true;
     }
 
     public function index()
     {
-        $this->_loaddata('user', 'access');
+        $this->_loaddata('user', 'access-all');
         $this->data['pages'] = 'Users';
         $this->data['users'] = $this->musers->get_all();
         $this->data['content'] = $this->load->view('users', $this->data, true);
-        $this->load->view('template', $this->data);
+        $this->load->view(ADMIN_TEMPLATE . '/template', $this->data);
     }
 
     public function profile($username = false)
@@ -40,65 +40,69 @@ class Users extends EMIF_Controller
         $this->data['profile'] = $this->musers->get(array('username' => $username ? $username : $this->session->userdata('username')));
         $this->data['editable'] = !$username || $this->session->userdata('role_id') <= 2;
         $this->data['content'] = $this->load->view('profile', $this->data, true);
-        $this->load->view('template', $this->data);
+        $this->load->view(ADMIN_TEMPLATE . '/template', $this->data);
     }
 
     public function change_pict()
     {
-        $target = 'assets/images/users/';
-        if (($_FILES['file']['name']) != null) {
-            $this->load->helpers('upload');
-            $handle = new upload($_FILES['file']);
-            if ($handle->uploaded) {
-                $size = $handle->getwidth()>$handle->getheight()?$handle->getheight():$handle->getwidth();
-                $handle->file_new_name_body = $this->input->post('user_id');
-                $handle->file_overwrite = true;
-                $handle->file_new_name_ext = 'jpg';
-                $handle->file_force_extension = true;
-                $handle->image_resize = true;
-                $handle->image_x = $size;
-                $handle->image_y = $size;
-                $handle->image_ratio_crop = true;
-                $handle->image_ratio_fill = true;
-                $handle->process(DOC_ROOT . $target);
-                if ($handle->processed) {
-                    $this->musers->set(
-                        array('user_id' => $this->input->post('user_id')),
-                        array('pict' => $target . $this->input->post('user_id') . '.jpg')
-                    );
-                    echo "Profile picture berhasil diubah!";
-                    echo "<script>
+        if ($this->_loaddata('user', 'access-all', true) || $this->input->post('user_id') == $this->session->userdata('user_id')) {
+            $target = 'assets/images/users/';
+            if (($_FILES['file']['name']) != null) {
+                $this->load->library('imageupload');
+                $this->imageupload->upload($_FILES['userfile']);
+                if ($this->imageupload->uploaded) {
+                    $size = $this->imageupload->getwidth() > $this->imageupload->getheight() ? $this->imageupload->getheight() : $this->imageupload->getwidth();
+                    $this->imageupload->file_new_name_body = $this->input->post('user_id');
+                    $this->imageupload->file_overwrite = true;
+                    $this->imageupload->file_new_name_ext = 'jpg';
+                    $this->imageupload->file_force_extension = true;
+                    $this->imageupload->image_resize = true;
+                    $this->imageupload->image_x = $size;
+                    $this->imageupload->image_y = $size;
+                    $this->imageupload->image_ratio_crop = true;
+                    $this->imageupload->image_ratio_fill = true;
+                    $this->imageupload->process(DOC_ROOT . $target);
+                    if ($this->imageupload->processed) {
+                        $this->musers->set(
+                            array('user_id' => $this->input->post('user_id')),
+                            array('pict' => $target . $this->input->post('user_id') . '.jpg')
+                        );
+                        echo "Profile picture berhasil diubah!";
+                        echo "<script>
                             setTimeout(function(){
                                 history.go(-1);
                             }, 3000)
                           </script>";
-                } else {
-                    echo "<script type='text/javascript'>alert('gagal upload foto $handle->error] !');history.go(-1)</script>";
+                    } else {
+                        echo "<script type='text/javascript'>alert('gagal upload foto $this->imageupload->error] !');history.go(-1)</script>";
+                    }
+                    $this->imageupload->clean();
                 }
-                $handle->clean();
             }
         }
     }
 
     public function change_pass()
     {
-        $user = $this->musers->get($this->input->post('user_id'));
-        if (md5($this->input->post('old-pass')) == $user->pass) {
-            if ($this->input->post('pass') == $this->input->post('re-pass')) {
-                $this->musers->set(
-                    array('user_id' => $this->input->post('user_id')),
-                    array('pass' => md5($this->input->post('pass')))
-                );
-                echo "Password berhasil diubah!";
+        if ($this->_loaddata('user', 'access-all', true) || $this->input->post('user_id') == $this->session->userdata('user_id')) {
+            $user = $this->musers->get($this->input->post('user_id'));
+            if (md5($this->input->post('old-pass')) == $user->pass) {
+                if ($this->input->post('pass') == $this->input->post('re-pass')) {
+                    $this->musers->set(
+                        array('user_id' => $this->input->post('user_id')),
+                        array('pass' => md5($this->input->post('pass')))
+                    );
+                    echo "Password berhasil diubah!";
+                } else
+                    echo "Retype password tidak cocok!";
             } else
-                echo "Retype password tidak cocok!";
-        } else
-            echo "Maaf, password yang anda masukkan salah!";
-        echo "<script>
+                echo "Maaf, password yang anda masukkan salah!";
+            echo "<script>
                 setTimeout(function(){
                     history.go(-1);
                 }, 3000)
               </script>";
+        }
     }
 
     public function add()
@@ -121,7 +125,8 @@ class Users extends EMIF_Controller
         if ($correct && $this->musers->add(array_merge($array,
                 array(
                     'uri' => "users/profile/" . strtolower($array['username']),
-                    'pict' => "images/users/default.png"
+                    'pict' => "assets/images/users/default.jpg",
+                    'status' => "active"
                 )))
         ) {
             echo "User baru telah dibuat!";
@@ -135,8 +140,8 @@ class Users extends EMIF_Controller
     Password: ' . $array['pass'] . '
 
     Jika anda merasa bukanlah pihak yang dituju harap menghiraukan email ini.';
-                $header = 'From:noreply@codemastery.net' . '\r\n';
-                if (send_email($array['email'], $subject, $message, $header))
+                $header = 'From:noreply@' . SITE_URL . '\r\n';
+                if (mail($array['email'], $subject, $message, $header))
                     echo '<script>alert("Email telah dikirimkan ke ' . $array['email'] . '")</script>';
             }
         } else {
@@ -151,11 +156,14 @@ class Users extends EMIF_Controller
 
     public function edit($id)
     {
-        $this->_loaddata('admin-page', 'read');
-        if ($id == $this->session->userdata('user_id') || $this->session->userdata('role_id') <= 2) {
+        if ($id == $this->session->userdata('user_id') || $this->_loaddata('user', 'access-all', true)) {
             $data = $this->input->post(NULL);
+            $data['uri'] = "users/profile/" . strtolower($data['username']);
             if ($this->musers->set($id, $data)) {
-                $this->session->set_userdata('username', $data['username']);
+                if($id == $this->session->userdata('user_id'))
+                    $this->session->set_userdata('username', $data['username']);
+                if (isset($data['tanggal_masuk']))
+                    redirect('users');
                 redirect(base_url('users/profile/' . $data['username']));
             }
         }
@@ -166,6 +174,6 @@ class Users extends EMIF_Controller
     {
         $this->_loaddata('user', 'access-all');
         $this->musers->delete(array('user_id' => $id));
-        redirect(base_url('user'));
+        redirect(base_url('users'));
     }
 }
